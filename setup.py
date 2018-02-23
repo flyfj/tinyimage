@@ -7,7 +7,7 @@ with open("./configs/requirements.txt", "r") as f:
 
 setup(
     name="deepimage",
-    version="0.0.2",
+    version="0.0.3",
     description="a lightweight image object library",
     keywords="computer vision image",
     url="https://flyfj@bitbucket.org/flyfj/deepimage.git",
