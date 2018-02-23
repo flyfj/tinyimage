@@ -1,3 +1,4 @@
 certifi==2018.1.18
 numpy==1.14.1
--e git+https://flyfj@bitbucket.org/flyfj/owlimage.git@b18354045d24eab73b826767497b0908ff7dfd1f#egg=owlimage
+-e git+https://flyfj@bitbucket.org/flyfj/owlimage.git@69ec19b43852ec95bd27263f767096d70431f0d1#egg=owlimage
+Pillow==5.0.0

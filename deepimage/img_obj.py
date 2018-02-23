@@ -1,4 +1,4 @@
-"""Image object representation for owl.
+"""Image object representation.
 """
 
 from PIL import Image, ImageDraw
@@ -7,8 +7,8 @@ import numpy as np
 import img_tools
 
 
-class OwlImage(object):
-  """Image object for owl.
+class DeepImage(object):
+  """Image object.
 
   This class should be the interface to operate on images.
   """

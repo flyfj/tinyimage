@@ -1,11 +1,11 @@
 import unittest
 
-from owlimage import OwlImage
+from img_obj import DeepImage
 
 
-class OwlImageTester(unittest.TestCase):
+class DeepImageTester(unittest.TestCase):
   def test_img_from_file(self):
-    img = OwlImage(
+    img = DeepImage(
         fp="/home/jiefeng/Pictures/628bc1f5baba49fed675368f1483b0d6.jpg")
     img.show("test image")
 
