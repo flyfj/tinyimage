@@ -1,1 +1,1 @@
-from img_obj import OwlImage
+from OwlImage.img_obj import OwlImage
