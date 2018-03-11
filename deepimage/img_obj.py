@@ -4,6 +4,8 @@
 from PIL import Image, ImageDraw
 import numpy as np
 
+import cv2
+
 import img_tools
 
 
@@ -35,22 +37,22 @@ class DeepImage(object):
     assert not fp or not url or not img_base64 or not img_arr, "you need to provide either file path or url."
     if fp:
       self.img_arr = img_tools.read_img_arr(fp)
-      self.img_ref = fp
     if url:
       self.img_arr = img_tools.read_img_arr_from_url(url)
-      self.img_ref = url
     if img_bin:
       self.img_arr = img_tools.img_bin_to_img_arr(img_bin)
-      self.img_ref = self.to_datauri()
     if img_base64:
       self.img_arr = img_tools.base64_to_img_arr(img_base64)
-      self.img_ref = img_tools.base64_to_data_uri(img_base64)
+    # don't directly check img_arr.
     if img_arr is not None:
       self.img_arr = img_arr
-      self.img_ref = self.to_datauri()
+    self.img_ref = self.to_datauri()
+
+  def get_ref(self):
+    return self.img_ref
 
   def clone(self):
-    new_img = OwlImage(img_arr=np.copy(self.img_arr))
+    new_img = DeepImage(img_arr=np.copy(self.img_arr))
     return new_img
 
   def width(self):
@@ -80,6 +82,14 @@ class DeepImage(object):
 
   def to_array(self):
     return self.img_arr
+
+  def to_opencv_img(self):
+    """Convert array to bgr format.
+    """
+    return self.img_arr.copy()[:, :, ::-1]
+
+  def to_gray(self):
+    pass
 
   def get_base64_sha_encoding(self):
     """Encode base64 of the image.
@@ -111,7 +121,7 @@ class DeepImage(object):
       texts: texts to show on the top left corner of each box.
     
     Returns:
-      new owlimg object with drawn image.
+      new deepimage object with drawn image.
     """
     num_box = len(boxes)
     num_text = len(texts)
@@ -151,4 +161,4 @@ class DeepImage(object):
     Args:
       new_sz: (new_height, new_width).
     """
-    self.img_arr = self.img_arr.resize((new_sz[1], new_sz[0]))
+    self.img_arr = cv2.resize(self.img_arr, (new_sz[1], new_sz[0]))

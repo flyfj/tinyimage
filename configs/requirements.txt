@@ -1,5 +1,5 @@
 certifi==2018.1.18
--e git+https://flyfj@bitbucket.org/flyfj/deepimage.git@3d9e5712341bce6ea82bf155fdb348f3e17d2153#egg=deepimage
+-e git+https://flyfj@bitbucket.org/flyfj/deepimage.git@f957d85ae3d9eb32c8dd50d5e699732fb4780467#egg=deepimage
 numpy==1.14.1
--e git+https://flyfj@bitbucket.org/flyfj/deepimage.git@3d9e5712341bce6ea82bf155fdb348f3e17d2153#egg=owlimage
+-e git+https://flyfj@bitbucket.org/flyfj/deepimage.git@f957d85ae3d9eb32c8dd50d5e699732fb4780467#egg=owlimage
 Pillow==5.0.0

@@ -4,8 +4,10 @@ NOTE: all base64 string is encoded from binary data.
 """
 
 import base64
+import glob
 import hashlib
 import mimetypes
+import os
 import PIL.Image
 
 import io
@@ -124,7 +126,7 @@ def img_bin_to_img_arr(img_bin, use_grayscale=False):
     new_img = pil_img.convert("L")
   else:
     new_img = pil_img.convert("RGB")
-  return np.array(new_img)
+  return np.array(new_img).astype(np.uint8)
 
 
 def img_bin_to_sha1(img_bin):
@@ -254,3 +256,26 @@ def get_new_dim(imgw, imgh, max_dim=400):
     new_imgh = max_dim
     new_imgw = imgw * max_dim / imgh
   return new_imgw, new_imgh
+
+
+def list_files(target_dir, fn_exts):
+  """List all files match given extensions.
+
+  Match both upper and lower cases.
+
+  Args:
+    fn_exts: a list of file extension in the form of "*.jpg".
+  
+  Returns:
+    a list of found files.
+  """
+  all_exts = []
+  for ext in fn_exts:
+    all_exts.append(ext.lower())
+    all_exts.append(ext.upper())
+  all_exts = set(all_exts)
+  all_fns = []
+  for cur_ext in all_exts:
+    cur_fns = glob.glob(os.path.join(target_dir, cur_ext))
+    all_fns.extend(cur_fns)
+  return all_fns
