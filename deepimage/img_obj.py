@@ -14,11 +14,6 @@ class DeepImage(object):
 
   This class should be the interface to operate on images.
   """
-  # internal image as numpy array: <height, width, channels>.
-  # in RGB order.
-  img_arr = None
-  # reference to the image, file or url.
-  img_ref = None
 
   def __init__(self,
                fp=None,
@@ -34,6 +29,10 @@ class DeepImage(object):
       img_base64: base64 string of image data.
       img_arr: numpy array of image.
     """
+    # internal image as numpy array: <height, width, channels> in RGB order.
+    self.img_arr = None
+    # reference to the image, file or url.
+    self.img_ref = None
     assert not fp or not url or not img_base64 or not img_arr, "you need to provide either file path or url."
     if fp:
       self.img_arr = img_tools.read_img_arr(fp)
@@ -43,8 +42,8 @@ class DeepImage(object):
       self.img_arr = img_tools.img_bin_to_img_arr(img_bin)
     if img_base64:
       self.img_arr = img_tools.base64_to_img_arr(img_base64)
-    # don't directly check img_arr.
     if img_arr is not None:
+      # don't directly check img_arr.
       self.img_arr = img_arr
     self.img_ref = self.to_datauri()
 
