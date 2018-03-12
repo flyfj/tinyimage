@@ -6,7 +6,7 @@ import numpy as np
 
 import cv2
 
-import img_tools
+import tools
 
 
 class DeepImage(object):
@@ -35,22 +35,26 @@ class DeepImage(object):
     self.img_ref = None
     assert not fp or not url or not img_base64 or not img_arr, "you need to provide either file path or url."
     if fp:
-      self.img_arr = img_tools.read_img_arr(fp)
+      self.img_arr = tools.read_img_arr(fp)
     if url:
-      self.img_arr = img_tools.read_img_arr_from_url(url)
+      self.img_arr = tools.read_img_arr_from_url(url)
     if img_bin:
-      self.img_arr = img_tools.img_bin_to_img_arr(img_bin)
+      self.img_arr = tools.img_bin_to_img_arr(img_bin)
     if img_base64:
-      self.img_arr = img_tools.base64_to_img_arr(img_base64)
+      self.img_arr = tools.base64_to_img_arr(img_base64)
     if img_arr is not None:
       # don't directly check img_arr.
       self.img_arr = img_arr
-    self.img_ref = self.to_datauri()
+    # self.img_ref = self.to_datauri()
 
   def get_ref(self):
+    """Get image reference.
+    """
     return self.img_ref
 
   def clone(self):
+    """Create a deep copy of the image.
+    """
     new_img = DeepImage(img_arr=np.copy(self.img_arr))
     return new_img
 
@@ -63,20 +67,22 @@ class DeepImage(object):
   def write_to_file(self, save_fn):
     """Write the image to file.
     """
-    img_tools.write_img_arr(self.img_arr, save_fn)
+    tools.write_img_arr(self.img_arr, save_fn)
 
   def to_base64(self):
-    img_base64 = img_tools.img_arr_to_base64(self.img_arr)
+    """Export image data as base64 string.
+    """
+    img_base64 = tools.img_arr_to_base64(self.img_arr)
     return img_base64
 
   def to_datauri(self):
     img_base64 = self.to_base64()
-    img_datauri = img_tools.base64_to_data_uri(img_base64)
+    img_datauri = tools.base64_to_data_uri(img_base64)
     return img_datauri
 
   def to_binary(self):
     img_base64 = self.to_base64()
-    img_bin = img_tools.base64_to_img_bin(img_base64)
+    img_bin = tools.base64_to_img_bin(img_base64)
     return img_bin
 
   def to_array(self):
@@ -88,6 +94,8 @@ class DeepImage(object):
     return self.img_arr.copy()[:, :, ::-1]
 
   def to_gray(self):
+    """Convert to grayscale.
+    """
     pass
 
   def get_base64_sha_encoding(self):
@@ -95,13 +103,13 @@ class DeepImage(object):
 
     SHA2 is used.
     """
-    img_base64 = img_tools.img_arr_to_base64(self.img_arr)
-    return img_tools.base64_to_sha256(img_base64)
+    img_base64 = tools.img_arr_to_base64(self.img_arr)
+    return tools.base64_to_sha256(img_base64)
 
   def get_pil_img(self):
     """Convert to pil image.
     """
-    pil_img = img_tools.img_arr_to_pil_img(self.img_arr)
+    pil_img = tools.img_arr_to_pil_img(self.img_arr)
     return pil_img
 
   def draw_boxes(self,
@@ -147,12 +155,12 @@ class DeepImage(object):
       if num_text > 0:
         draw_cxt.text(
             (new_box[0] + 5, new_box[1] + 5), texts[idx], fill=cur_color)
-    return OwlImage(img_arr=np.copy(img_tools.pil_img_to_img_arr(cur_img)))
+    return OwlImage(img_arr=np.copy(tools.pil_img_to_img_arr(cur_img)))
 
   def show(self, fig_title):
     """Display image in a titled window.
     """
-    img_tools.show_img_arr(self.img_arr, fig_title)
+    tools.show_img_arr(self.img_arr, fig_title)
 
   def resize(self, new_sz):
     """Resize image.

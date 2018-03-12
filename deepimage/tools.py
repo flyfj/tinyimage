@@ -1,7 +1,8 @@
 """Image processing code.
-
-NOTE: all base64 string is encoded from binary data.
 """
+from __future__ import print_function
+from future.standard_library import install_aliases
+install_aliases()
 
 import base64
 import glob
@@ -11,8 +12,9 @@ import os
 import PIL.Image
 
 import io
-from cStringIO import StringIO
-import urllib2
+
+from urllib.request import urlopen, Request
+from urllib.error import HTTPError
 
 import numpy as np
 """ IO """
@@ -24,11 +26,13 @@ def read_img_bin(img_fn):
   Args:
     img_fn: image file path.
   Returns:
-    image binary data.
+    image binary data as hex string.
   """
-  with open(img_fn, "rb") as f:
-    img_bin_data = f.read()
-    return img_bin_data
+  with io.open(img_fn, "rb") as f:
+    # bytes object.
+    img_bin_bytes = f.read()
+    img_bin_str = img_bin_bytes.hex()
+    return img_bin_str
 
 
 def read_img_arr(img_fn):
@@ -70,8 +74,8 @@ def download_img_from_url(img_url):
   try:
     user_agent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7"
     header = {'User-agent': user_agent}
-    req_obj = urllib2.Request(img_url, None, header)
-    res_fh = urllib2.urlopen(req_obj, timeout=10)
+    req_obj = Request(img_url, None, header)
+    res_fh = urlopen(req_obj, timeout=10)
     img_bin = res_fh.read()
     content_type = res_fh.headers["content-type"]
     mimetypes.init()
@@ -83,7 +87,7 @@ def download_img_from_url(img_url):
         img_ext = "jpg"
     return img_bin, img_ext
   except Exception as ex:
-    print "error downloading image from: {}. error: {}".format(img_url, ex)
+    print("error downloading image from: {}. error: {}".format(img_url, ex))
     raise ex
 
 
@@ -111,17 +115,18 @@ def img_bin_to_base64(img_bin):
   return img_base64
 
 
-def img_bin_to_img_arr(img_bin, use_grayscale=False):
+def img_bin_to_img_arr(img_bin_str, use_grayscale=False):
   """Convert image binary data to numpy array.
 
   Args:
-    img_bin: binary image data.
+    img_bin_str: binary image data string.
     use_grayscale: convert to grayscale.
 
   Returns:
     numpy array: (height, width, chs).
   """
-  pil_img = PIL.Image.open(StringIO(img_bin))
+  img_bin_bytes = bytes.fromhex(img_bin_str)
+  pil_img = PIL.Image.open(io.BytesIO(img_bin_bytes))
   if use_grayscale:
     new_img = pil_img.convert("L")
   else:
@@ -220,7 +225,7 @@ def pil_img_to_img_bin(pil_img):
   output = io.BytesIO()
   pil_img.save(output, format="JPEG")
   img_bin = output.getvalue()
-  return img_bin
+  return img_bin.decode()
 
 
 def show_img_arr(img_arr, title):
