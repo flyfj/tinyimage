@@ -77,17 +77,23 @@ class DeepImage(object):
     return tools.bytes_to_str(img_base64)
 
   def to_datauri(self):
+    """Export datauri string used in html/css.
+    """
     img_base64_str = self.to_base64()
     img_datauri = tools.base64_to_data_uri(img_base64_str)
     return img_datauri
 
   def to_binary(self):
+    """Export binary bytes.
+    """
     img_base64_str = self.to_base64()
     img_base64 = tools.str_to_bytes()
     img_bin = tools.base64_to_img_bin(img_base64)
     return img_bin
 
   def to_array(self):
+    """Export numpy array (height, width, channels).
+    """
     return self.img_arr
 
   def to_opencv_img(self):

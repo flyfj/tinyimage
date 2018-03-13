@@ -25,6 +25,7 @@ img_from_binary = DeepImage(img_bin=img_binary_bytes)
 img_from_base64 = DeepImage(img_base64=base64_encoded_string)
 
 # export to different formats.
+img_obj.to_array()
 img_obj.to_datauri()
 img_obj.to_opencv_img()
 img_obj.to_pil_img()
