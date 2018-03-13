@@ -7,11 +7,10 @@ install_aliases()
 import base64
 import glob
 import hashlib
+import io
 import mimetypes
 import os
 import PIL.Image
-
-import io
 
 from urllib.request import urlopen, Request
 from urllib.error import HTTPError

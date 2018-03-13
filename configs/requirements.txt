@@ -1,5 +1,7 @@
 certifi==2018.1.18
--e git+https://flyfj@bitbucket.org/flyfj/deepimage.git@f957d85ae3d9eb32c8dd50d5e699732fb4780467#egg=deepimage
+-e git+https://github.com/perceptance/deepimage.git@398725caa297d5cc93d4dc3e1111de31720bf601#egg=deepimage
+future==0.16.0
 numpy==1.14.1
--e git+https://flyfj@bitbucket.org/flyfj/deepimage.git@f957d85ae3d9eb32c8dd50d5e699732fb4780467#egg=owlimage
+opencv-python==3.4.0.12
+-e git+https://github.com/perceptance/deepimage.git@398725caa297d5cc93d4dc3e1111de31720bf601#egg=owlimage
 Pillow==5.0.0

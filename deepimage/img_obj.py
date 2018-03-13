@@ -34,7 +34,7 @@ class DeepImage(object):
     self.img_arr = None
     # reference to the image, file or url.
     self.img_ref = None
-    assert not fp or not url or not img_base64 or not img_arr, "you need to provide either file path or url."
+    assert not fp or not url or not img_bin or not img_base64 or not img_arr, "you need to provide either file path or url."
     if fp:
       self.img_arr = tools.read_img_arr(fp)
     if url:

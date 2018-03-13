@@ -5,6 +5,8 @@ DeepImage is a lightweight image object library (despite it's called 'deep').
 Given there are various image processing and computer vision libraries out there, DeepImage can serve as a unifed interface for image data
 to easily enable exchange between different formats.
 
+Only python 3 is tested now.
+
 ## Installation
 
 ```
