@@ -74,7 +74,7 @@ class DeepImage(object):
     """Export image data as base64 string.
     """
     img_base64 = tools.img_arr_to_base64(self.img_arr)
-    return img_base64.decode()
+    return tools.bytes_to_str(img_base64)
 
   def to_datauri(self):
     img_base64_str = self.to_base64()
@@ -82,7 +82,8 @@ class DeepImage(object):
     return img_datauri
 
   def to_binary(self):
-    img_base64 = self.to_base64()
+    img_base64_str = self.to_base64()
+    img_base64 = tools.str_to_bytes()
     img_bin = tools.base64_to_img_bin(img_base64)
     return img_bin
 

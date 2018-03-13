@@ -99,6 +99,18 @@ def read_img_arr_from_url(img_url):
 """ Type conversion """
 
 
+def str_to_bytes(input_str):
+  """Convert string to bytes.
+  """
+  return input_str.encode()
+
+
+def bytes_to_str(input_bytes):
+  """Convert bytes to string.
+  """
+  return input_bytes.decode()
+
+
 def img_bin_to_base64(img_bin_bytes):
   """Convert image binary data to base64.
 
@@ -146,12 +158,11 @@ def base64_to_img_bin(img_base64):
   """Decode base64 image to binary string.
 
   Args:
-    img_base64: base64 image string.
+    img_base64: base64 image bytes.
   Returns:
     binary image data.
   """
   img_bin = base64.b64decode(img_base64)
-  # or: img_bin = img_base64.decode("base64")
   return img_bin
 
 
