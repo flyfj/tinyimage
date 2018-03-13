@@ -27,7 +27,7 @@ class DeepImage(object):
       fp: filepath.
       url: url path.
       img_bin: bytes of image data.
-      img_base64: base64 string of image data.
+      img_base64: base64 bytes of image data.
       img_arr: numpy array of image.
     """
     # internal image as numpy array: <height, width, channels> in RGB order.
@@ -109,7 +109,7 @@ class DeepImage(object):
     img_base64 = tools.img_arr_to_base64(self.img_arr)
     return tools.base64_to_sha256(img_base64)
 
-  def get_pil_img(self):
+  def to_pil_img(self):
     """Convert to pil image.
     """
     pil_img = tools.img_arr_to_pil_img(self.img_arr)

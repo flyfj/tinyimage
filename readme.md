@@ -21,11 +21,17 @@ from deepimage import DeepImage
 # create images from different sources.
 img_from_file = DeepImage(fp="path/to/image")
 img_from_url = DeepImage(url="https://somedomain/eg.jpg")
-img_from_binary = DeepImage(img_bin=img_binary_string)
+img_from_binary = DeepImage(img_bin=img_binary_bytes)
 img_from_base64 = DeepImage(img_base64=base64_encoded_string)
 
 # export to different formats.
-
+img_obj.to_datauri()
+img_obj.to_opencv_img()
+img_obj.to_pil_img()
+img_obj.show("image window")
+img_obj.resize((new_height, new_width))
+img_obj.write_to_file("/path/to/file")
+new_img = img_obj.draw_boxes([box1, box2])
 ```
 
 ## Contributing
