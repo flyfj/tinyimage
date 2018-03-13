@@ -26,13 +26,11 @@ def read_img_bin(img_fn):
   Args:
     img_fn: image file path.
   Returns:
-    image binary data as hex string.
+    image binary data as bytes.
   """
   with io.open(img_fn, "rb") as f:
-    # bytes object.
     img_bin_bytes = f.read()
-    img_bin_str = img_bin_bytes.hex()
-    return img_bin_str
+    return img_bin_bytes
 
 
 def read_img_arr(img_fn):
@@ -70,7 +68,6 @@ def download_img_from_url(img_url):
   Returns:
     binary string of image, image format.
   """
-  # print "Downloading image..."
   try:
     user_agent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7"
     header = {'User-agent': user_agent}
@@ -102,30 +99,29 @@ def read_img_arr_from_url(img_url):
 """ Type conversion """
 
 
-def img_bin_to_base64(img_bin):
+def img_bin_to_base64(img_bin_bytes):
   """Convert image binary data to base64.
 
   Args:
-    img_bin: binary image data/string.
+    img_bin: binary image data bytes.
 
   Returns:
     base64 of image data.
   """
-  img_base64 = base64.b64encode(img_bin)
+  img_base64 = base64.b64encode(img_bin_bytes)
   return img_base64
 
 
-def img_bin_to_img_arr(img_bin_str, use_grayscale=False):
+def img_bin_to_img_arr(img_bin_bytes, use_grayscale=False):
   """Convert image binary data to numpy array.
 
   Args:
-    img_bin_str: binary image data string.
+    img_bin_bytes: binary image data bytes.
     use_grayscale: convert to grayscale.
 
   Returns:
     numpy array: (height, width, chs).
   """
-  img_bin_bytes = bytes.fromhex(img_bin_str)
   pil_img = PIL.Image.open(io.BytesIO(img_bin_bytes))
   if use_grayscale:
     new_img = pil_img.convert("L")
@@ -184,21 +180,21 @@ def base64_to_img_arr(img_base64, use_grayscale=False):
   return img_bin_to_img_arr(img_bin_str, use_grayscale)
 
 
-def base64_to_data_uri(img_base64):
+def base64_to_data_uri(img_base64_str):
   """For display in html.
   """
-  datauri = "data:image/jpg;base64," + img_base64
+  datauri = "data:image/jpeg;base64," + img_base64_str
   return datauri
 
 
 def img_arr_to_base64(img_arr):
   """Convert numpy array image to base64.
   """
-  # arr to bin
+  # arr to binary.
   pil_img = img_arr_to_pil_img(img_arr)
-  img_bin = pil_img_to_img_bin(pil_img)
-  # bin to base64
-  img_base64 = img_bin_to_base64(img_bin)
+  img_bin_bytes = pil_img_to_img_bin(pil_img)
+  # binary to base64.
+  img_base64 = img_bin_to_base64(img_bin_bytes)
   return img_base64
 
 
@@ -225,7 +221,9 @@ def pil_img_to_img_bin(pil_img):
   output = io.BytesIO()
   pil_img.save(output, format="JPEG")
   img_bin = output.getvalue()
-  return img_bin.decode()
+  return img_bin
+  # img_bin = pil_img.tobytes()
+  # return img_bin
 
 
 def show_img_arr(img_arr, title):

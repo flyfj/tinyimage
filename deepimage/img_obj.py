@@ -45,7 +45,7 @@ class DeepImage(object):
     if img_arr is not None:
       # don't directly check img_arr.
       self.img_arr = img_arr
-    # self.img_ref = self.to_datauri()
+    self.img_ref = self.to_datauri()
 
   def get_ref(self):
     """Get image reference.
@@ -73,11 +73,11 @@ class DeepImage(object):
     """Export image data as base64 string.
     """
     img_base64 = tools.img_arr_to_base64(self.img_arr)
-    return img_base64
+    return img_base64.decode()
 
   def to_datauri(self):
-    img_base64 = self.to_base64()
-    img_datauri = tools.base64_to_data_uri(img_base64)
+    img_base64_str = self.to_base64()
+    img_datauri = tools.base64_to_data_uri(img_base64_str)
     return img_datauri
 
   def to_binary(self):
