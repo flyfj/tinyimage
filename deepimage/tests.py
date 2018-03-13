@@ -10,6 +10,7 @@ class DeepImageTester(unittest.TestCase):
     with open("base64.txt", "w") as f:
       f.write(img.to_datauri())
     img.show("test image")
+    print(img.get_base64_sha_encoding())
 
 
 if __name__ == "__main__":

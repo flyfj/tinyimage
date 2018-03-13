@@ -26,6 +26,7 @@ class DeepImage(object):
     Args:
       fp: filepath.
       url: url path.
+      img_bin: bytes of image data.
       img_base64: base64 string of image data.
       img_arr: numpy array of image.
     """
@@ -96,7 +97,8 @@ class DeepImage(object):
   def to_gray(self):
     """Convert to grayscale.
     """
-    pass
+    gray_img = cv2.cvtColor(self.img_arr, cv2.COLOR_RGB2GRAY)
+    return gray_img
 
   def get_base64_sha_encoding(self):
     """Encode base64 of the image.
@@ -155,7 +157,7 @@ class DeepImage(object):
       if num_text > 0:
         draw_cxt.text(
             (new_box[0] + 5, new_box[1] + 5), texts[idx], fill=cur_color)
-    return OwlImage(img_arr=np.copy(tools.pil_img_to_img_arr(cur_img)))
+    return DeepImage(img_arr=np.copy(tools.pil_img_to_img_arr(cur_img)))
 
   def show(self, fig_title):
     """Display image in a titled window.

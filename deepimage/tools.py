@@ -130,7 +130,7 @@ def img_bin_to_img_arr(img_bin_bytes, use_grayscale=False):
   return np.array(new_img).astype(np.uint8)
 
 
-def img_bin_to_sha1(img_bin):
+def img_bin_to_sha256(img_bin):
   """Hash image binary data to sha1.
 
   Args:
@@ -138,8 +138,8 @@ def img_bin_to_sha1(img_bin):
   Returns:
     sha1 of the image.
   """
-  img_sha1 = hashlib.sha1(img_bin).hexdigest()
-  return img_sha1
+  img_sha2 = hashlib.sha256(img_bin).hexdigest()
+  return img_sha2
 
 
 def base64_to_img_bin(img_base64):
