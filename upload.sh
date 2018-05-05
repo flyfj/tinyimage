@@ -1,4 +1,3 @@
-pip freeze > configs/requirements.txt
 if [ -d "dist" ]; then
   rm -r dist
 fi

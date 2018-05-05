@@ -1,6 +1,4 @@
-certifi==2018.1.18
--e git+https://github.com/perceptance/deepimage.git@398725caa297d5cc93d4dc3e1111de31720bf601#egg=deepimage
-future==0.16.0
-numpy==1.14.1
+certifi==2018.4.16
+numpy==1.14.3
 opencv-python==3.4.0.12
-Pillow==5.0.0
+Pillow==5.1.0
