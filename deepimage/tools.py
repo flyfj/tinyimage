@@ -1,8 +1,8 @@
 """Image processing code.
 """
-from __future__ import print_function
-from future.standard_library import install_aliases
-install_aliases()
+# from __future__ import print_function
+# from future.standard_library import install_aliases
+# install_aliases()
 
 import base64
 import glob
