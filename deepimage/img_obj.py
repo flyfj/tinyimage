@@ -6,7 +6,7 @@ import numpy as np
 
 import cv2
 
-import tools
+from deepimage import tools
 
 
 class DeepImage(object):
