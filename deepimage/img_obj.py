@@ -87,7 +87,7 @@ class DeepImage(object):
     """Export binary bytes.
     """
     img_base64_str = self.to_base64()
-    img_base64 = tools.str_to_bytes()
+    img_base64 = tools.str_to_bytes(img_base64_str)
     img_bin = tools.base64_to_img_bin(img_base64)
     return img_bin
 
@@ -142,7 +142,7 @@ class DeepImage(object):
     num_box = len(boxes)
     num_text = len(texts)
     assert num_text == 0 or num_text == num_box
-    cur_img = self.get_pil_img()
+    cur_img = self.to_pil_img()
     draw_cxt = ImageDraw.Draw(cur_img)
     for idx, box in enumerate(boxes):
       new_box = [box[0], box[1], box[0] + box[2] - 1, box[1] + box[3] - 1]
@@ -171,10 +171,12 @@ class DeepImage(object):
     """
     tools.show_img_arr(self.img_arr, fig_title)
 
-  def resize(self, new_sz):
+  def resize(self, new_sz=None, max_dim=None):
     """Resize image.
 
     Args:
       new_sz: (new_height, new_width).
+      max_dim: size of maximum dimension.
     """
+    assert new_sz is not None or max_dim is not None, "either new size or max dim has to be provided."
     self.img_arr = cv2.resize(self.img_arr, (new_sz[1], new_sz[0]))
