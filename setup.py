@@ -9,7 +9,7 @@ with open("./configs/requirements.txt", "r") as f:
 
 setup(
     name="deepimage",
-    version="0.0.5",
+    version="0.0.6",
     description="a lightweight image object library",
     keywords="computer vision image",
     url="https://github.com/perceptance/deepimage",

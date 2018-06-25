@@ -16,6 +16,8 @@ from urllib.request import urlopen, Request
 from urllib.error import HTTPError
 
 import numpy as np
+
+import cv2
 """ IO """
 
 
@@ -264,10 +266,10 @@ def get_new_dim(imgw, imgh, max_dim=400):
   new_imgh = imgh
   if imgw > imgh:
     new_imgw = max_dim
-    new_imgh = imgh * max_dim / imgw
+    new_imgh = imgh * max_dim // imgw
   if imgh > imgw:
     new_imgh = max_dim
-    new_imgw = imgw * max_dim / imgh
+    new_imgw = imgw * max_dim // imgh
   return new_imgw, new_imgh
 
 

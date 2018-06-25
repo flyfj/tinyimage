@@ -36,7 +36,8 @@ class DeepImage(object):
     self.img_ref = None
     assert not fp or not url or not img_bin or not img_base64 or not img_arr, "you need to provide either file path or url."
     if fp:
-      self.img_arr = tools.read_img_arr(fp)
+      cv_img = cv2.imread(fp)
+      self.img_arr = cv2.cvtColor(cv_img, cv2.COLOR_BGR2RGB)
     if url:
       self.img_arr = tools.read_img_arr_from_url(url)
     if img_bin:
@@ -179,4 +180,7 @@ class DeepImage(object):
       max_dim: size of maximum dimension.
     """
     assert new_sz is not None or max_dim is not None, "either new size or max dim has to be provided."
+    if max_dim is not None:
+      new_sz = tools.get_new_dim(self.width(), self.height(), max_dim)
+      new_sz = (new_sz[1], new_sz[0])
     self.img_arr = cv2.resize(self.img_arr, (new_sz[1], new_sz[0]))
