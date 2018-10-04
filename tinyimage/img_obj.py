@@ -6,17 +6,17 @@ import numpy as np
 
 import cv2
 
-from deepimage import tools
+from tinyimage import tools
 
 
-class DeepImage(object):
+class TinyImage(object):
   """Image object.
 
   This class should be the interface to operate on images.
   """
 
   def __init__(self,
-               fp=None,
+               file=None,
                url=None,
                img_bin=None,
                img_base64=None,
@@ -34,9 +34,9 @@ class DeepImage(object):
     self.img_arr = None
     # reference to the image, file or url.
     self.img_ref = None
-    assert not fp or not url or not img_bin or not img_base64 or not img_arr, "you need to provide either file path or url."
-    if fp:
-      cv_img = cv2.imread(fp)
+    assert not file or not url or not img_bin or not img_base64 or not img_arr, "you need to provide either file path or url."
+    if file:
+      cv_img = cv2.imread(file)
       self.img_arr = cv2.cvtColor(cv_img, cv2.COLOR_BGR2RGB)
     if url:
       self.img_arr = tools.read_img_arr_from_url(url)
@@ -57,7 +57,7 @@ class DeepImage(object):
   def clone(self):
     """Create a deep copy of the image.
     """
-    new_img = DeepImage(img_arr=np.copy(self.img_arr))
+    new_img = TinyImage(img_arr=np.copy(self.img_arr))
     return new_img
 
   def width(self):
@@ -165,7 +165,7 @@ class DeepImage(object):
       if num_text > 0:
         draw_cxt.text(
             (new_box[0] + 5, new_box[1] + 5), texts[idx], fill=cur_color)
-    return DeepImage(img_arr=np.copy(tools.pil_img_to_img_arr(cur_img)))
+    return TinyImage(img_arr=np.copy(tools.pil_img_to_img_arr(cur_img)))
 
   def show(self, fig_title):
     """Display image in a titled window.

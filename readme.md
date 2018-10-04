@@ -21,7 +21,7 @@ TinyImage object contains many handy method to export different formats of the i
 from tinyimage import TinyImage
 
 # create images from different sources.
-img_from_file = TinyImage(fp="path/to/image")
+img_from_file = TinyImage(file="path/to/image")
 img_from_url = TinyImage(url="https://somedomain/eg.jpg")
 img_from_binary = TinyImage(img_bin=img_binary_bytes)
 img_from_base64 = TinyImage(img_base64=base64_encoded_string)
