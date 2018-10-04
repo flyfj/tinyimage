@@ -16,8 +16,6 @@ from urllib.request import urlopen, Request
 from urllib.error import HTTPError
 
 import numpy as np
-
-import cv2
 """ IO """
 
 
