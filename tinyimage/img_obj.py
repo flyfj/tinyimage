@@ -16,7 +16,7 @@ class TinyImage(object):
   """
 
   def __init__(self,
-               file=None,
+               path=None,
                url=None,
                img_bin=None,
                img_base64=None,
@@ -24,19 +24,19 @@ class TinyImage(object):
     """Create an image object from a file path or url.
 
     Args:
-      fp: filepath.
+      path: filepath.
       url: url path.
       img_bin: bytes of image data.
-      img_base64: base64 bytes of image data.
+      img_base64: base64 bytes of image data, no header.
       img_arr: numpy array of image.
     """
     # internal image as numpy array: <height, width, channels> in RGB order.
     self.img_arr = None
-    # reference to the image, file or url.
+    # reference to the image, path or url.
     self.img_ref = None
-    assert not file or not url or not img_bin or not img_base64 or not img_arr, "you need to provide either file path or url."
-    if file:
-      cv_img = cv2.imread(file)
+    assert not path or not url or not img_bin or not img_base64 or not img_arr, "you need to provide either file path or url."
+    if path:
+      cv_img = cv2.imread(path)
       self.img_arr = cv2.cvtColor(cv_img, cv2.COLOR_BGR2RGB)
     if url:
       self.img_arr = tools.read_img_arr_from_url(url)
@@ -66,7 +66,7 @@ class TinyImage(object):
   def height(self):
     return self.img_arr.shape[0]
 
-  def write_to_file(self, save_fn):
+  def save_to_file(self, save_fn):
     """Write the image to file.
     """
     tools.write_img_arr(self.img_arr, save_fn)
@@ -98,7 +98,7 @@ class TinyImage(object):
     return self.img_arr
 
   def to_opencv_img(self):
-    """Convert array to bgr format.
+    """Clone array to bgr format.
     """
     return self.img_arr.copy()[:, :, ::-1]
 

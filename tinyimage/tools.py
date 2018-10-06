@@ -260,15 +260,20 @@ def get_new_dim(imgw, imgh, max_dim=400):
   Returns:
     new img width and height.
   """
-  new_imgw = imgw
-  new_imgh = imgh
-  if imgw > imgh:
-    new_imgw = max_dim
-    new_imgh = imgh * max_dim // imgw
-  if imgh > imgw:
-    new_imgh = max_dim
-    new_imgw = imgw * max_dim // imgh
+  max_val = max(imgw, imgh)
+  ratio = max_val / max_dim
+  new_imgw = int(imgw / ratio)
+  new_imgh = int(imgh / ratio)
   return new_imgw, new_imgh
+  # new_imgw = imgw
+  # new_imgh = imgh
+  # if imgw > imgh:
+  #   new_imgw = max_dim
+  #   new_imgh = imgh * max_dim // imgw
+  # if imgh > imgw:
+  #   new_imgh = max_dim
+  #   new_imgw = imgw * max_dim // imgh
+  # return new_imgw, new_imgh
 
 
 def list_files(target_dir, fn_exts):
