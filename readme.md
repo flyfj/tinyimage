@@ -25,15 +25,19 @@ img_from_file = TinyImage(file="path/to/image")
 img_from_url = TinyImage(url="https://somedomain/eg.jpg")
 img_from_binary = TinyImage(img_bin=img_binary_bytes)
 img_from_base64 = TinyImage(img_base64=base64_encoded_string)
+# save image to file.
+img_obj.write_to_file("/path/to/file")
 
 # export to different formats.
 img_obj.to_array()
 img_obj.to_datauri()
 img_obj.to_opencv_img()
 img_obj.to_pil_img()
+# resize.
+img_obj.resize(new_sz=(new_height, new_width))
+img_obj.resize(max_dim=400)
+# visualization.
 img_obj.show("image window")
-img_obj.resize((new_height, new_width))
-img_obj.write_to_file("/path/to/file")
 new_img = img_obj.draw_boxes([box1, box2])
 ```
 
