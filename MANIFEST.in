@@ -1,1 +1,2 @@
-include configs/requirements.txt
+include README.md LICENSE requirements.txt
+recursive-include tests *.py *.jpg *.txt

@@ -15,7 +15,8 @@ setup(
     url="https://github.com/VisualDataIO/tinyimage",
     author="Jie Feng",
     author_email="jiefeng@perceptance.io",
-    packages=find_packages("./"),
+    packages=["tinyimage"],
     install_requires=dep_packages,
+    tests_require=["pytest>=3.8.0"],
     include_package_data=True,
     zip_safe=False)

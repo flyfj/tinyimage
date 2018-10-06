@@ -46,6 +46,18 @@ img_obj.show("image window")
 new_img = img_obj.draw_boxes([box1, box2])
 ```
 
+## Development
+
+To set up for development, do
+```python
+pip install -e .
+```
+
+To run tests, do
+```python
+python setup.py test
+```
+
 ## Contributing
 
 If you have questions, comments, bug reports or adding new data sources, please create an issue.
