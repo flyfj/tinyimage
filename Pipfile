@@ -10,8 +10,8 @@ opencv-python = "*"
 
 [dev-packages]
 pytest = "*"
-"e1839a8" = {editable = true, path = "."}
 pipenv = "*"
+twine = "*"
 
 [requires]
 python_version = "3.6"

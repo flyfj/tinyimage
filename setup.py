@@ -16,7 +16,7 @@ except:
 
 setup(
     name="tinyimage",
-    version="0.0.0",
+    version="0.0.1",
     description="a lightweight image object library",
     keywords="computer vision image",
     url="https://github.com/VisualDataIO/tinyimage",
