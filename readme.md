@@ -13,8 +13,6 @@ Only python 3 is tested now.
 pip install tinyimage
 ```
 
-For development, use pipenv to configure environment.
-
 ## Usage
 
 TinyImage object contains many handy method to export different formats of the image data and perform operations on image.
@@ -50,14 +48,16 @@ new_img = img_obj.draw_boxes([box1, box2])
 
 ## Development
 
-To set up for development, do
+To set up for development, use pipenv to manage environment.
+
 ```python
-pip install -e .
+pip install pipenv
+pipenv install --dev
 ```
 
 To run tests, do
 ```python
-python setup.py test
+pytest tests/
 ```
 
 ## Contributing
