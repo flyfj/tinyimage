@@ -1,11 +1,18 @@
-from setuptools import setup, find_packages
+from setuptools import setup, find_packages, find_namespace_packages
 
-with open("./requirements.txt", "r") as f:
-  dep_packages = f.readlines()
-  # remove local install.
-  dep_packages = [x.strip() for x in dep_packages if not x.startswith("-e")]
-  # remove unnecessary packages.
-  dep_packages = [x for x in dep_packages if not x.startswith("certifi")]
+# only used for dev.
+requirements = []
+test_requirements = []
+try:
+  from pipenv.project import Project
+  from pipenv.utils import convert_deps_to_pip
+  pfile = Project(chdir=False).parsed_pipfile
+  requirements = convert_deps_to_pip(pfile['packages'], r=False)
+  print(requirements)
+  test_requirements = convert_deps_to_pip(pfile['dev-packages'], r=False)
+  print(test_requirements)
+except:
+  pass
 
 setup(
     name="tinyimage",
@@ -15,8 +22,9 @@ setup(
     url="https://github.com/VisualDataIO/tinyimage",
     author="Jie Feng",
     author_email="jiefeng@perceptance.io",
-    packages=["tinyimage"],
-    install_requires=dep_packages,
-    tests_require=["pytest>=3.8.0"],
+    package_dir={"": "src"},
+    packages=find_namespace_packages(where="src"),
+    install_requires=requirements,
+    tests_require=test_requirements,
     include_package_data=True,
     zip_safe=False)

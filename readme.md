@@ -13,6 +13,8 @@ Only python 3 is tested now.
 pip install tinyimage
 ```
 
+For development, use pipenv to configure environment.
+
 ## Usage
 
 TinyImage object contains many handy method to export different formats of the image data and perform operations on image.
