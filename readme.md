@@ -48,14 +48,16 @@ new_img = img_obj.draw_boxes([box1, box2])
 
 ## Development
 
-To set up for development, do
+To set up for development, use pipenv to manage environment.
+
 ```python
-pip install -e .
+pip install pipenv
+pipenv install --dev
 ```
 
 To run tests, do
 ```python
-python setup.py test
+pytest tests/
 ```
 
 ## Contributing
