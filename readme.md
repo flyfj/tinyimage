@@ -27,7 +27,7 @@ img_from_binary = TinyImage(img_bin=img_binary_bytes)
 img_from_base64 = TinyImage(img_base64=base64_encoded_string)
 
 # save image to file.
-img_obj.write_to_file("/path/to/file")
+img_obj.save_to_file("/path/to/file")
 
 # export to different formats.
 img_obj.to_array()
